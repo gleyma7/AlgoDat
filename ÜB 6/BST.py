@@ -38,6 +38,13 @@ class BST:
 
         self.root = root
 
+    def createTreeElement(self, key):
+        '''
+        create now element in tree
+        '''
+        new_element = TreeElement(key, False)
+        new_element.left = 
+
     def insert(self, x):
         '''
             inserts a given key into the binary search tree
@@ -45,7 +52,9 @@ class BST:
             Parameters:
                 x - comparable key to insert
         '''
-        
+        if root is None:
+            root = TreeElement(x ,x, None, None, None)
+
 
     def getrange(self, xmin, xmax):
         '''
