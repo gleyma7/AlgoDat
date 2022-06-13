@@ -15,45 +15,29 @@ class Node:
 
 class BST(object):
     def __init__(self, root=None) -> None:
-        self.root = root # settet root bei jeder Initialisierung = None 
+        self.root = root # settet root bei jeder Initialisierung = None
 
     def insert(self, data):
         if self.root is None:
             self.root = Node(data, parent=None, left = None, right=None)
         else:
-            current = self.root  #setzt current als Wurzel
-            parent = None 
+            current = self.root  # setzt current als Wurzel
+            parent = None
             # prüft ob Ende des erreicht ist oder ob doppelt daten vorhanden sind
-            # current ist aktuelles parent element 
-            while current is not None and current.data != data: 
-                parent = current 
-                if data < current.data: 
+            # current ist aktuelles parent element
+            # while current is not None and current.data != data:
+                parent = current
+                if data < current.data:
                     current = current.left
                 else:
-                    current = current.right 
+                    current = current.right
 
-            # Schlüssel ist noch nicht im Baum -> auf linker seite einfügen 
-            if current is None: 
+            # Schlüssel ist noch nicht im Baum -> auf linker seite einfügen
+            if current is None:
                 if data < parent.data:
                     parent.left = Node(data, parent, None, None)
                 else:
                     parent.right = Node(data, parent, None, None)
-
-        '''
-        if self.data: 
-            if data < self.data: # wenn 
-                if self.left:
-                    self.left.insert(data)
-                else:
-                    self.left = Node(data)
-            elif data > self.data:
-                if self.right:
-                    self.right.insert(data)
-                else:
-                    self.right = Node(data)
-        else:
-            self.data = data
-        '''
 
     def preOrder(self, bst):
         if bst is None:
@@ -63,14 +47,6 @@ class BST(object):
             self.preOrder(bst.left)
             self.preOrder(bst.right)
 
-
-        """
-        if self.left:
-            self.left.__repr__()
-        print (self.node)
-        if self.right:
-            self.right.__repr__()
-        """
 
     def getrange(self, xmin, xmax):
             '''
@@ -95,10 +71,8 @@ class BST(object):
                     [2, 3, 4]
             '''
             out = []
-            
-            if self is None:
-                self.data = self.root
-            if self.data is not None:
+            # ! - Problem mit root
+            if self.data != type(None):
                 if self.data > xmin:
                     self.getrange(self.left, xmin, xmax)
                 if (xmin <= self.data) and (self.data <= xmax):
@@ -107,7 +81,7 @@ class BST(object):
                     self.getrange(self.right, xmin, xmax)
             return out
 
-        
+
 if __name__ == "__main__":
     bst = BST()
     bst.insert(7)
@@ -117,4 +91,4 @@ if __name__ == "__main__":
     bst.insert(10)
     bst.insert(1)
     bst.preOrder(bst.root)
-    print(bst.getrange(2,8))
+    print(bst.getrange(2, 8))
