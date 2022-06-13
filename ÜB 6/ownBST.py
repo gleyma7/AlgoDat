@@ -3,6 +3,15 @@
 
 
 class Node:
+    '''
+        represents a node in binary tree
+
+        Attributes:
+            key - the value according to which a binary search tree is sorted
+            parent - TreeElement representing the parent in the tree
+            left - TreeElement representing the left child in the tree
+            right - TreeElement representing the right child in the tree
+    '''
     def __init__(self, data, parent=None, left=None, right=None):
         self.data = data
         self.left = None
@@ -14,10 +23,23 @@ class Node:
 
 
 class BST(object):
+    '''
+        class that represents a binary search tree
+
+        Attributes:
+            root - a TreeElement that represents the root of the tree
+    '''
+
     def __init__(self, root=None) -> None:
         self.root = root # settet root bei jeder Initialisierung = None
 
     def insert(self, data):
+        '''
+            inserts a given key into the binary search tree
+
+            Parameters:
+                data - comparable key to insert
+        '''
         if self.root is None:
             self.root = Node(data, parent=None, left = None, right=None)
         else:
@@ -80,15 +102,21 @@ class BST(object):
                 if self.data < xmax:
                     self.getrange(self.right, xmin, xmax)
             return out
+        
+    def insert_from_file(self, filename='input.txt'):
+        '''
+            opens a file and inserts the content into the tree
+
+            Parameters:
+                filename - filename of file, must be in same filder
+        '''
+        with open(filename) as input:
+            words = input.read().splitlines()
+            for word in words:
+                self.insert(word)
 
 
 if __name__ == "__main__":
     bst = BST()
-    bst.insert(7)
-    bst.insert(8)
-    bst.insert(2)
-    bst.insert(3)
-    bst.insert(10)
-    bst.insert(1)
-    bst.preOrder(bst.root)
-    print(bst.getrange(2, 8))
+    bst.insert_from_file()
+    print(bst.getrange("qw","qw"))
