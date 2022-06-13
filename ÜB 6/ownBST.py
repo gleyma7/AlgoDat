@@ -7,6 +7,9 @@ class Node:
         self.left = None
         self.right = None
         self.parent = None
+    
+    def __str__ (self):
+        return str(self.data, self.left, self.right)
 
 class BST:
     def __init__(self, root=None) -> None:
@@ -24,7 +27,7 @@ class BST:
                 parent = current 
                 if data < current.data: 
                     current = current.left
-                else
+                else:
                     current = current.right 
 
             # Schlüssel ist noch nicht im Baum -> auf linker seite einfügen 
@@ -33,8 +36,8 @@ class BST:
                     parent.left = Node(data, parent, None, None)
                 else:
                     parent.right = Node(data, parent, None, None)
-                    
- '''
+
+        '''
         if self.data: 
             if data < self.data: # wenn 
                 if self.left:
@@ -48,20 +51,27 @@ class BST:
                     self.right = Node(data)
         else:
             self.data = data
-'''
+        '''
 
-    def __repr__(self) -> str:
+    def preOrder(self):
+        if  self.root.data is None:
+            return # "None"
+        else:
+            print(str(self))
+            self.preOrder(self.root.left)
+            self.preOrder(self.root.right)
+
+        """
         if self.left:
             self.left.__repr__()
         print (self.node)
         if self.right:
             self.right.__repr__()
-        
+        """
         
 if __name__ == "__main__":
-    #root = Node(2)
-    bst = BST() 
-    bst.insert(Node(7, None, None))
-    bst.insert(Node(3, None, None))
-
-    print(str(bst))
+    bst = BST()
+    bst.insert(7)
+    #bst.insert(3)
+    #bst.insert(10)
+    bst.preOrder()
