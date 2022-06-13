@@ -1,8 +1,5 @@
-# Copyright Robin Obliers 
-# Juni 2020 
-
-
-from turtle import left
+# Copyright th357, jr574, ro46 
+# Juni 2022
 
 
 class Node:
@@ -75,31 +72,41 @@ class BST(object):
             self.right.__repr__()
         """
 
-def getrange(self, xmin, xmax):
-        '''
-            returns all keys x with xmin <= x < x max.
+    def getrange(self, xmin, xmax):
+            '''
+                returns all keys x with xmin <= x < x max.
 
-            Implementation hints: May use either additional
-            parameters or call a recursive subfunction with
-            additional parameters.
+                Implementation hints: May use either additional
+                parameters or call a recursive subfunction with
+                additional parameters.
 
-            Parameters:
-                xmin - lower bound (including)
-                xmax - upper bound (excluding)
+                Parameters:
+                    xmin - lower bound (including)
+                    xmax - upper bound (excluding)
 
-            Returns:
-                List of keys with xmin <= x < xmax
+                Returns:
+                    List of keys with xmin <= x < xmax
 
-            Unit tests:
-                >>> bst = BST()
-                >>> bst.insert(3); bst.insert(1); bst.insert(6)
-                >>> bst.insert(2); bst.insert(5); bst.insert(4)
-                >>> sorted(bst.getrange(2, 5))
-                [2, 3, 4]
-        '''
-        if self.data is not None:
-            if self.data:
-                pass
+                Unit tests:
+                    >>> bst = BST()
+                    >>> bst.insert(3); bst.insert(1); bst.insert(6)
+                    >>> bst.insert(2); bst.insert(5); bst.insert(4)
+                    >>> sorted(bst.getrange(2, 5))
+                    [2, 3, 4]
+            '''
+            out = []
+            
+            if self is None:
+                self.data = self.root
+            if self.data is not None:
+                if self.data > xmin:
+                    self.getrange(self.left, xmin, xmax)
+                if (xmin <= self.data) and (self.data <= xmax):
+                    out.append(self.data)
+                if self.data < xmax:
+                    self.getrange(self.right, xmin, xmax)
+            return out
+
         
 if __name__ == "__main__":
     bst = BST()
@@ -110,3 +117,4 @@ if __name__ == "__main__":
     bst.insert(10)
     bst.insert(1)
     bst.preOrder(bst.root)
+    print(bst.getrange(2,8))
